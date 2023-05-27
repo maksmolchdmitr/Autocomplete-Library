@@ -17,12 +17,14 @@ public class Main {
     private static final String PRINT_PREFIX_TEXT = "Print prefix string > ";
 
     public static void main(String[] args) throws IOException {
+        System.gc();
         String filterText = getString("Print your filter > ");
         Filterer filterer = new CSVRowsFilterer(filterText);
         CSVRowSearcher searcher = new CSVRowSearcher(filterer, new FileRowReader(CSVFile));
         String prefix = getString(PRINT_PREFIX_TEXT);
         while (!prefix.equals(EXIT_PROGRAM_PREFIX_QUERY_STRING)) {
             searcher.printRowsByPrefix(prefix);
+            System.gc();
             prefix = getString(PRINT_PREFIX_TEXT);
         }
     }
