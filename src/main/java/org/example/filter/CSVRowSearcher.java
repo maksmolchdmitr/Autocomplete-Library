@@ -1,8 +1,8 @@
 package org.example.filter;
 
 import org.example.files.FileRowReader;
+import org.example.structure.EconomicalTrieStringMapper;
 import org.example.structure.StringMapper;
-import org.example.structure.TrieStringMapper;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,7 +11,7 @@ import static java.lang.System.currentTimeMillis;
 import static org.example.interact.CommandLineInteract.println;
 
 public class CSVRowSearcher {
-    private final StringMapper<Integer> rowStartPositions = new TrieStringMapper();
+    private final StringMapper<Integer> rowStartPositions = new EconomicalTrieStringMapper();
     private final FileRowReader rowReader;
 
     public CSVRowSearcher(Filterer filterer, FileRowReader rowReader) throws IOException {
@@ -27,7 +27,7 @@ public class CSVRowSearcher {
         while (row != null) {
             values = row.split(",");
             if (filterer.matches(values)) {
-                rowStartPositions.addMappedValue(values[1].replaceAll("\"", ""), currentPosition);
+                rowStartPositions.addMappedValue(values[1].replaceAll("\"", "").toLowerCase(), currentPosition);
             }
             currentPosition = rowReader.getCurrentPosition();
             row = rowReader.readNextRow();
@@ -38,7 +38,7 @@ public class CSVRowSearcher {
     public void printRowsByPrefix(String prefix) {
         AtomicInteger countRows = new AtomicInteger();
         long startTime = currentTimeMillis();
-        rowStartPositions.map(prefix).forEach(rowPosition -> {
+        rowStartPositions.map(prefix.toLowerCase()).forEach(rowPosition -> {
             try {
                 String row = rowReader.readRow(rowPosition);
                 countRows.getAndIncrement();
