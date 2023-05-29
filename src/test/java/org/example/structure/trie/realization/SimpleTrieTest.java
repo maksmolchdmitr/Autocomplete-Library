@@ -1,4 +1,4 @@
-package org.example.structure;
+package org.example.structure.trie.realization;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TrieTest {
+class SimpleTrieTest {
     @Test
     void simpleTest() {
-        Trie trie = new Trie();
+        SimpleTrie trie = new SimpleTrie();
         List<String> words = new java.util.ArrayList<>(List.of(
                 "Sun",
                 "Tree",

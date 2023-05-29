@@ -1,8 +1,10 @@
-package org.example.structure;
+package org.example.structure.trie.realization;
+
+import org.example.structure.trie.Trie;
 
 import java.util.*;
 
-public class EconomicalTrie {
+public class EconomicalTrie implements Trie {
     private static class Node {
         List<Character> characters;
         List<Node> nodes;
@@ -28,6 +30,7 @@ public class EconomicalTrie {
 
     private final Node root = new Node();
 
+    @Override
     public void insert(String word) {
         Node curNode = this.root;
         for (int i = 0; i < word.length(); i++) {
@@ -60,7 +63,7 @@ public class EconomicalTrie {
         if (node.isWord) words.add(prefix);
         if (node.characters != null) {
             for (var s : node.characters) {
-                words.addAll(getAllWordsFromNode(node.getNode(s), prefix + s));
+                words.addAll(getAllWordsFromNode(Objects.requireNonNull(node.getNode(s)), prefix + s));
             }
         }
         return words;

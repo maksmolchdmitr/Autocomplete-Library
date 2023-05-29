@@ -1,8 +1,10 @@
-package org.example.structure;
+package org.example.structure.trie.realization;
+
+import org.example.structure.trie.Trie;
 
 import java.util.*;
 
-public class Trie {
+public class SimpleTrie implements Trie {
     private static class Node {
         Map<Character, Node> children;
         boolean isWord = false;
@@ -10,6 +12,7 @@ public class Trie {
 
     private final Node root = new Node();
 
+    @Override
     public void insert(String word) {
         Node curNode = this.root;
         for (int i = 0; i < word.length(); i++) {

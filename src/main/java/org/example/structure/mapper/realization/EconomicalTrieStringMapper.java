@@ -1,12 +1,15 @@
-package org.example.structure;
+package org.example.structure.mapper.realization;
+
+import org.example.structure.mapper.StringMapper;
+import org.example.structure.trie.realization.EconomicalTrie;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TrieStringMapper implements StringMapper<Integer> {
-    private final Trie trie = new Trie();
+public class EconomicalTrieStringMapper implements StringMapper<Integer> {
+    private final EconomicalTrie trie = new EconomicalTrie();
     private final Map<String, Integer> map = new HashMap<>(8000);
 
     @Override

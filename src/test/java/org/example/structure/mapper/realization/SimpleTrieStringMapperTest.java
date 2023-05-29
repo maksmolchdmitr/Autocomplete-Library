@@ -1,5 +1,6 @@
-package org.example.structure;
+package org.example.structure.mapper.realization;
 
+import org.example.structure.mapper.StringMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TrieStringMapperTest {
+class SimpleTrieStringMapperTest {
     @Test
     void simpleTest() {
         StringMapper<Integer> mapper = new TrieStringMapper();
