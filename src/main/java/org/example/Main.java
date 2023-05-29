@@ -1,9 +1,9 @@
 package org.example;
 
 import org.example.files.FileRowReader;
-import org.example.filter.CSVRowSearcher;
-import org.example.filter.CSVRowsFilterer;
-import org.example.filter.Filterer;
+import org.example.filter.*;
+import org.example.searcher.AbstractRowSearcher;
+import org.example.searcher.realization.CSVRowSearcherPublisher;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +20,10 @@ public class Main {
         System.gc();
         String filterText = getString("Print your filter > ");
         Filterer filterer = new CSVRowsFilterer(filterText);
-        CSVRowSearcher searcher = new CSVRowSearcher(filterer, new FileRowReader(CSVFile));
+        AbstractRowSearcher searcher = new CSVRowSearcherPublisher(filterer, new FileRowReader(CSVFile));
         String prefix = getString(PRINT_PREFIX_TEXT);
         while (!prefix.equals(EXIT_PROGRAM_PREFIX_QUERY_STRING)) {
+            System.gc();
             searcher.printRowsByPrefix(prefix);
             System.gc();
             prefix = getString(PRINT_PREFIX_TEXT);
